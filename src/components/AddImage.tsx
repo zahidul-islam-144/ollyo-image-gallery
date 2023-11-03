@@ -11,7 +11,7 @@ const AddImage: FC = () => {
     const files = e.target?.files as FileList;
     // converting FileList to File[] using Array.from(obj) method
     const addedImageArray = Array.from(files);
-    // updated adding newly image into existing array
+    // updated adding new image into an existing array (previewImageArray)
     addedImageArray?.forEach((newImg) =>
       setPreviewImageArray((prev: any) => [
         ...prev,

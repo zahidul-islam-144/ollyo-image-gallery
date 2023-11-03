@@ -25,7 +25,7 @@ const StoreProvider: FC<PropsType> = ({ children }) => {
     useState<ImageArrayType[]>(imageArrayList);
   const [selectedImages, setSelectedImages] = useState<[]>([]);
 
-  console.log("* previewImageArray:", previewImageArray);
+  // console.log("* previewImageArray:", previewImageArray);
   // console.log("* selectedImages:", selectedImages);
   return (
     <MyContext.Provider
