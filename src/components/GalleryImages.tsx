@@ -1,60 +1,99 @@
 import React, {
-  Dispatch,
+  ChangeEvent,
   DragEvent,
   FC,
-  SetStateAction,
-  useEffect,
+  FormEvent,
+  SyntheticEvent,
   useState,
 } from "react";
-import { imageArray } from "../utilities/utils";
+import { imageArrayList } from "../utilities/utils";
 import AddImage from "./AddImage";
 import { ImageArrayType } from "../utilities/types";
+import useStore from "../hooks/useStore";
 
 const GalleryImages: FC = () => {
+  const {
+    previewImageArray,
+    setPreviewImageArray,
+    selectedImages,
+    setSelectedImages,
+    isDeleted,
+  } = useStore();
   const [targetId, setTargetId] = useState<number | null>(null);
-  const [imageArray2, setImageArray2] = useState<ImageArrayType[]>(imageArray);
+  const [isChecked, setIsChecked] = useState<boolean>(false)
 
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log("* dragOver:", e);
+    // console.log("* dragOver:", e);
   };
 
   const handleDragStart = (e: DragEvent<HTMLDivElement>, id: number) => {
-    console.log("* dragStart:", e);
+    // console.log("* dragStart:", e);
     setTargetId(Number(id));
   };
 
   const handleOnDrop = (e: DragEvent<HTMLDivElement>, id: number) => {
     console.log("* handleOnDrop:", e);
-    const dragImage = imageArray2.find((element) => element?.id == targetId);
-    const dropImage = imageArray2.find(
+    const dragImage = previewImageArray.find(
+      (element) => element?.id == targetId
+    );
+    const dropImage = previewImageArray.find(
       (element) => element.id == e.currentTarget.id
     );
     const updatedArray = handleMovement(dragImage?.id - 1, dropImage?.id - 1);
-    setImageArray2(updatedArray);
+    setPreviewImageArray(updatedArray);
   };
 
   const handleMovement = (from: any, to: any) => {
-    const f = imageArray2.splice(from, 1)[0];
-    imageArray2.splice(to, 0, f);
-    return imageArray2;
+    const f = previewImageArray.splice(from, 1)[0];
+    previewImageArray.splice(to, 0, f);
+    return previewImageArray;
   };
 
-  console.log("* targetId:", targetId);
+  const handleCheckBox = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value, checked } = e?.target;
+
+    const filteredChecked = previewImageArray.filter(
+      (item) => item?.id === Number(value));
+
+    const filteredUnchecked = selectedImages.filter(
+      (item) => item?.id !== Number(value))
+
+    if (checked) {
+      setSelectedImages((prev: any) => [...prev, filteredChecked[0]]);
+    } else {
+      setSelectedImages(filteredUnchecked);
+    }
+    console.log("* checkBox:", value, checked, filteredChecked[0]);
+  };
+
+
+
+  console.log("* selectedImages:", selectedImages);
+  // console.log("* isChecked:", isChecked);
   return (
     <div className="image_container">
-      {imageArray2.map((item, index) => (
+      {previewImageArray.map((pItem, index) => (
         <>
-          {/* {console.log('* item',item)} */}
           <div
-            key={item?.id}
-            className={`item${index + 1}`}
-            id={item?.id}
+            key={pItem?.id}
+            className={`pItem${index + 1}`}
+            id={pItem?.id}
             onDragOver={(e) => handleDragOver(e)}
-            onDragStart={(e) => handleDragStart(e, item?.id)}
-            onDrop={(e) => handleOnDrop(e, item?.id)}
+            onDragStart={(e) => handleDragStart(e, pItem?.id)}
+            onDrop={(e) => handleOnDrop(e, pItem?.id)}
+            draggable={true}
+            
           >
-            <img src={item?.image} alt="product_photo" />
+            <img src={pItem?.image} alt={pItem?.id} />
+            <input
+              type="checkbox"
+              id={pItem?.id}
+              // checked = {isChecked ? true : false}
+              value={pItem?.id}
+              name="image-selection"
+              onChange={(e) => handleCheckBox(e)}
+            />
           </div>
         </>
       ))}
@@ -65,4 +104,3 @@ const GalleryImages: FC = () => {
 };
 
 export default GalleryImages;
-

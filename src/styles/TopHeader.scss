@@ -33,5 +33,11 @@ section.topHeader_main {
       font-weight: 600;
       font-size: medium;
     }
+
+    &:hover{
+      span{
+        text-decoration: underline;
+      }
+    }
   }
 }

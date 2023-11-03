@@ -1,6 +1,6 @@
 import { ImageArrayType } from "./types";
 
-export const imageArray:ImageArrayType[] = [
+export const imageArrayList:ImageArrayType[] = [
     {
         id: 1,
         image: "/images/image-1.webp"
