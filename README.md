@@ -1,5 +1,7 @@
 # Image-Gallery
 
+## Live URL: https://ollyo-image-gallery-task-zislam.netlify.app
+
 ## Technology Used: 
 1. React
 2. TypeScriopt
