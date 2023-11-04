@@ -7,7 +7,8 @@
 2. TypeScript
 3. Context API
 4. React Memo
-
+5. dataTransfer API for DnD and sorting
+   
 # Note: No external library and packages are used. 
 
 ## To run this project, first clone the repo and run the command "npm intsall", finally run "npm start"
