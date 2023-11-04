@@ -188,7 +188,7 @@ div.add_photo {
 @media screen and (min-width: 768px) {
   div.add_photo {
     border: 2px dotted;
-    height: 16em;
+    height: 13.1em;
     width: 100%;
     margin: 0 auto;
     border-radius: 8px;
@@ -325,7 +325,53 @@ div.add_photo {
 @media screen and (min-width: 1400px) {
   div.add_photo {
     border: 2px dotted;
-    height: 12em;
+    height: 15em;
+    width: 100%;
+    // max-width: 12em;
+    margin: 0 auto;
+    border-radius: 8px;
+    border-color: #919090;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+
+    label.label_block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+
+      svg.add_icon {
+        display: block;
+        height: 1.5rem;
+        width: 1.5rem;
+        margin: 5px 0;
+        cursor: pointer;
+      }
+    }
+
+    input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 39%;
+      opacity: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (min-width: 1600px) and (max-width: 2000px){
+  div.add_photo {
+    border: 2px dotted;
+    height: 20em;
     width: 100%;
     // max-width: 12em;
     margin: 0 auto;
