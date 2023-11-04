@@ -4,7 +4,7 @@
 
 ## Technology Used: 
 1. React
-2. TypeScriopt
+2. TypeScript
 3. Context API
 4. React Memo
 
