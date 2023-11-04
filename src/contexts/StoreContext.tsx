@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, createContext, useState } from "react";
+import React, { FC, ReactNode, createContext, memo, useState } from "react";
 import { ContextType, ImageArrayType } from "../utilities/types";
 import { imageArrayList } from "../utilities/utils";
 
@@ -43,4 +43,4 @@ const StoreProvider: FC<PropsType> = ({ children }) => {
   );
 };
 
-export default StoreProvider;
+export default memo(StoreProvider);

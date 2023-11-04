@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from "react";
+import React, { ChangeEvent, FC, memo } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import useStore from "../hooks/useStore";
 
@@ -40,4 +40,4 @@ const AddImage: FC = () => {
   );
 };
 
-export default AddImage;
+export default memo(AddImage);

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, DragEvent, FC, useRef, useState } from "react";
+import React, { ChangeEvent, DragEvent, FC, memo, useRef, useState } from "react";
 import AddImage from "./AddImage";
 import useStore from "../hooks/useStore";
 
@@ -116,4 +116,4 @@ const GalleryImages: FC = () => {
   );
 };
 
-export default GalleryImages;
+export default memo(GalleryImages);
