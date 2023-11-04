@@ -19,34 +19,40 @@ const GalleryImages: FC = () => {
   } = useStore();
 
   // const [isDragging, setIsDragging] = useState<boolean | null>(null);
-  const dragItem = useRef<any>(null);
-  const dragOverItem = useRef<any>(null);
 
+  // set the draggable data
   const handleOnDragStart = (
     e: DragEvent<HTMLDivElement>,
     dragItem_index: number
   ): void => {
-    dragItem.current = dragItem_index;
+    const setDraggedIndex = e?.dataTransfer?.setData(
+      "draggedIndex",
+      dragItem_index.toString()
+    );
   };
 
-  const handleOnDragEnter = (dragOverItem_index: number): void => {
-    dragOverItem.current = dragOverItem_index;
+  // get the dropped data
+  const handleOnDrop = (e: DragEvent<HTMLDivElement>, dropIndex: number) => {
+    const getDragOverItem = e?.dataTransfer?.getData("draggedIndex");
+    handleSwap(Number(getDragOverItem), dropIndex);
   };
 
-  const handleSorting = (): void => {
+  // swapping position from -> to
+  const handleSwap = (draggedIndex: number, dropIndex: number) => {
     const _duplicateArray = [...previewImageArray];
 
-    // remove and save dragged image index
-    const draggedImageIndex = _duplicateArray.splice(dragItem.current, 1)[0];
+    // get the current-items (images)
+    const dragged = _duplicateArray[draggedIndex];
+    const drop = _duplicateArray[dropIndex];
 
-    // switching the position
-    _duplicateArray.splice(dragOverItem.current, 0, draggedImageIndex);
+    //swapping their position
+    _duplicateArray[draggedIndex] = drop;
+    _duplicateArray[dropIndex] = dragged;
 
-    //reset the index
-    dragItem.current = null;
-    dragOverItem.current = null;
+    // Update their indexes to reflect their new positions
+    dragged.index = dropIndex;
+    drop.index = draggedIndex;
 
-    //updated the sortable array to the final array
     setPreviewImageArray(_duplicateArray);
   };
 
@@ -80,8 +86,7 @@ const GalleryImages: FC = () => {
             id="singleImageBlock"
             onDragOver={(e: DragEvent<HTMLDivElement>) => e.preventDefault()}
             onDragStart={(e) => handleOnDragStart(e, index)}
-            onDragEnter={(e) => handleOnDragEnter(index)}
-            onDragEnd={handleSorting}
+            onDrop={(e) => handleOnDrop(e, index)}
             draggable={true}
           >
             <img src={pItem?.image} alt={pItem?.id} />
