@@ -11,6 +11,12 @@ div.image_container {
   box-shadow: inset 0 -3em 3em rgba(0, 200, 0, 0.3), 0 0 0 2px white,
     0.3em 0.3em 1em rgba(200, 0, 0, 0.6);
 
+  & > h3 {
+    width: 11rem;
+    text-align: left;
+    margin: 20% auto;
+  }
+
   & > div:first-child {
     grid-column: 1/3;
     grid-row: 1/3;
@@ -120,6 +126,12 @@ div.image_container {
     box-shadow: inset 0 -3em 3em rgba(0, 200, 0, 0.3), 0 0 0 2px white,
       0.3em 0.3em 1em rgba(200, 0, 0, 0.6);
 
+    & > h3 {
+      width: 11rem;
+      text-align: left;
+      margin: 20% auto;
+    }
+
     & > div:first-child {
       grid-column: 1/2;
       grid-row: 1/2;
@@ -224,6 +236,12 @@ div.image_container {
     box-shadow: inset 0 -3em 3em rgba(0, 200, 0, 0.3), 0 0 0 2px white,
       0.3em 0.3em 1em rgba(200, 0, 0, 0.6);
 
+    & > h3 {
+      width: 11rem;
+      text-align: left;
+      margin: 20% auto;
+    }
+
     & > div:first-child {
       grid-column: 1/2;
       grid-row: 1/2;
@@ -322,6 +340,11 @@ div.image_container {
     box-shadow: inset 0 -3em 3em rgba(0, 200, 0, 0.3), 0 0 0 2px white,
       0.3em 0.3em 1em rgba(200, 0, 0, 0.6);
 
+    & > h3 {
+      width: 11rem;
+      text-align: left;
+      margin: 20% auto;
+    }
     & > div:first-child {
       grid-column: 1/3;
       height: 100%;
@@ -418,6 +441,12 @@ div.image_container {
     border-radius: 15px;
     box-shadow: inset 0 -3em 3em rgba(0, 200, 0, 0.3), 0 0 0 2px white,
       0.3em 0.3em 1em rgba(200, 0, 0, 0.6);
+
+    & > h3 {
+      width: 11rem;
+      text-align: left;
+      margin: 20% auto;
+    }
 
     & > div:first-child {
       grid-column: 1/3;
@@ -517,6 +546,12 @@ div.image_container {
     box-shadow: inset 0 -3em 3em rgba(0, 200, 0, 0.3), 0 0 0 2px white,
       0.3em 0.3em 1em rgba(200, 0, 0, 0.6);
 
+    & > h3 {
+      width: 11rem;
+      text-align: left;
+      margin: 20% auto;
+    }
+
     & > div:first-child {
       grid-column: 1/3;
       grid-row: 1/3;
@@ -615,6 +650,12 @@ div.image_container {
     box-shadow: inset 0 -3em 3em rgba(0, 200, 0, 0.3), 0 0 0 2px white,
       0.3em 0.3em 1em rgba(200, 0, 0, 0.6);
 
+    & > h3 {
+      width: 11rem;
+      text-align: left;
+      margin: 20% auto;
+    }
+
     & > div:first-child {
       grid-column: 1/3;
       grid-row: 1/3;
@@ -712,6 +753,13 @@ div.image_container {
     border-radius: 15px;
     box-shadow: inset 0 -3em 3em rgba(0, 200, 0, 0.3), 0 0 0 2px white,
       0.3em 0.3em 1em rgba(200, 0, 0, 0.6);
+
+    & > h3 {
+      width: 11rem;
+      text-align: left;
+      margin: 20% auto;
+      padding-left: 10px;
+    }
 
     & > div:first-child {
       grid-column: 1/3;

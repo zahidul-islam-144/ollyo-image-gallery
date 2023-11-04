@@ -1,11 +1,9 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from "react";
+import React, { ChangeEvent, FC } from "react";
 import { BiImageAdd } from "react-icons/bi";
-import { HTMLInputEvent, ImageArrayType } from "../utilities/types";
 import useStore from "../hooks/useStore";
 
 const AddImage: FC = () => {
   const { previewImageArray, setPreviewImageArray } = useStore();
-  const [newImageArray, setNewImageArray] = useState<ImageArrayType[]>([]);
 
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target?.files as FileList;

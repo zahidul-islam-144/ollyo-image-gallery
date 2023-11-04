@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { BsCheckSquareFill } from "react-icons/bs";
 import useStore from "../hooks/useStore";
 
@@ -8,8 +8,9 @@ const TopHeader: FC = () => {
     setPreviewImageArray,
     selectedImages,
     setSelectedImages,
-    setIsDeleted,
   } = useStore();
+
+
   const hasLength: number = selectedImages?.length;
 
   const handleDelete = () => {

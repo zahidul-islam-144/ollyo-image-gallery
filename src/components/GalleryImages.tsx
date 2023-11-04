@@ -1,13 +1,5 @@
-import React, {
-  ChangeEvent,
-  DragEvent,
-  FC,
-  useRef,
-  useState,
-} from "react";
-import { imageArrayList } from "../utilities/utils";
+import React, { ChangeEvent, DragEvent, FC, useRef, useState } from "react";
 import AddImage from "./AddImage";
-import { ImageArrayType } from "../utilities/types";
 import useStore from "../hooks/useStore";
 
 const GalleryImages: FC = () => {
@@ -22,14 +14,14 @@ const GalleryImages: FC = () => {
   const dragItem = useRef<any>(null);
   const dragOverItem = useRef<any>(null);
 
-  const handleOnDragStart = (dragItem_index:number) => {
+  const handleOnDragStart = (dragItem_index: number): void => {
     dragItem.current = dragItem_index;
     setIsDragging(true);
-  }
+  };
 
-  const handleOnDragEnter = (dragOverItem_index:number) => {
-    dragOverItem.current = dragOverItem_index
-  }
+  const handleOnDragEnter = (dragOverItem_index: number): void => {
+    dragOverItem.current = dragOverItem_index;
+  };
 
   const handleSorting = (): void => {
     const _duplicateArray = [...previewImageArray];
@@ -43,7 +35,7 @@ const GalleryImages: FC = () => {
     //reset the index
     dragItem.current = null;
     dragOverItem.current = null;
-    setIsDragging(false)
+    setIsDragging(false);
 
     //updated the sortable array to the final array
     setPreviewImageArray(_duplicateArray);
@@ -54,12 +46,12 @@ const GalleryImages: FC = () => {
 
     // if checked
     const filteredChecked = previewImageArray.filter(
-      (item) => item?.id === Number(value)
+      (item: any) => item?.id === Number(value)
     );
 
     //if unchecked
     const filteredUnchecked = selectedImages.filter(
-      (item) => item?.id !== Number(value)
+      (item: any) => item?.id !== Number(value)
     );
 
     if (checked) {
@@ -68,21 +60,20 @@ const GalleryImages: FC = () => {
       setSelectedImages(filteredUnchecked);
     }
   };
-console.log('* isDragging', isDragging)
+
   return (
     <div className="image_container">
-      {previewImageArray.map((pItem, index) => (
-        <>
+      {previewImageArray.map((pItem: any, index: number) =>
+        previewImageArray.length !== 0 ? (
           <div
             key={pItem?.id}
             className={`pItem${index + 1} singleImageBlock`}
             id={pItem?.id}
             onDragOver={(e: DragEvent<HTMLDivElement>) => e.preventDefault()}
-            onDragStart={()=> handleOnDragStart(index)}
+            onDragStart={() => handleOnDragStart(index)}
             onDragEnter={(e) => handleOnDragEnter(index)}
             onDragEnd={handleSorting}
             draggable={true}
-           
           >
             <img src={pItem?.image} alt={pItem?.id} />
             <div
@@ -112,10 +103,15 @@ console.log('* isDragging', isDragging)
               onChange={(e) => handleCheckBox(e)}
             />
           </div>
-        </>
-      ))}
-
+        ) : (
+          <p>Loading...</p>
+        )
+      )}
       <AddImage />
+
+      {previewImageArray?.length === 0 && (
+        <h3>No Data found! Please, Insert Image.</h3>
+      )}
     </div>
   );
 };
