@@ -1,4 +1,12 @@
-import React, { ChangeEvent, DragEvent, FC, memo, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  DragEvent,
+  FC,
+  memo,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import AddImage from "./AddImage";
 import useStore from "../hooks/useStore";
 
@@ -10,13 +18,15 @@ const GalleryImages: FC = () => {
     setSelectedImages,
   } = useStore();
 
-  const [isDragging, setIsDragging] = useState<boolean | null>(null);
+  // const [isDragging, setIsDragging] = useState<boolean | null>(null);
   const dragItem = useRef<any>(null);
   const dragOverItem = useRef<any>(null);
 
-  const handleOnDragStart = (dragItem_index: number): void => {
+  const handleOnDragStart = (
+    e: DragEvent<HTMLDivElement>,
+    dragItem_index: number
+  ): void => {
     dragItem.current = dragItem_index;
-    setIsDragging(true);
   };
 
   const handleOnDragEnter = (dragOverItem_index: number): void => {
@@ -35,7 +45,6 @@ const GalleryImages: FC = () => {
     //reset the index
     dragItem.current = null;
     dragOverItem.current = null;
-    setIsDragging(false);
 
     //updated the sortable array to the final array
     setPreviewImageArray(_duplicateArray);
@@ -68,9 +77,9 @@ const GalleryImages: FC = () => {
           <div
             key={pItem?.id}
             className={`pItem${index + 1} singleImageBlock`}
-            id={pItem?.id}
+            id="singleImageBlock"
             onDragOver={(e: DragEvent<HTMLDivElement>) => e.preventDefault()}
-            onDragStart={() => handleOnDragStart(index)}
+            onDragStart={(e) => handleOnDragStart(e, index)}
             onDragEnter={(e) => handleOnDragEnter(index)}
             onDragEnd={handleSorting}
             draggable={true}
