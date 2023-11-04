@@ -2,8 +2,6 @@ import React, {
   ChangeEvent,
   DragEvent,
   FC,
-  FormEvent,
-  SyntheticEvent,
   useRef,
   useState,
 } from "react";
@@ -18,21 +16,25 @@ const GalleryImages: FC = () => {
     setPreviewImageArray,
     selectedImages,
     setSelectedImages,
-    isDeleted,
   } = useStore();
 
-  const [dragImageIndex, setDragImageIndex] = useState<number | null>(null);
-  const [dragOverImageIndex, setDragOverImageIndex] = useState<number | null>(
-    null
-  );
-  const [checked, setChecked] = useState<boolean | null>(null);
+  const [isDragging, setIsDragging] = useState<boolean | null>(null);
   const dragItem = useRef<any>(null);
   const dragOverItem = useRef<any>(null);
+
+  const handleOnDragStart = (dragItem_index:number) => {
+    dragItem.current = dragItem_index;
+    setIsDragging(true);
+  }
+
+  const handleOnDragEnter = (dragOverItem_index:number) => {
+    dragOverItem.current = dragOverItem_index
+  }
 
   const handleSorting = (): void => {
     const _duplicateArray = [...previewImageArray];
 
-    // removre and save dragged image index
+    // remove and save dragged image index
     const draggedImageIndex = _duplicateArray.splice(dragItem.current, 1)[0];
 
     // switching the position
@@ -41,6 +43,7 @@ const GalleryImages: FC = () => {
     //reset the index
     dragItem.current = null;
     dragOverItem.current = null;
+    setIsDragging(false)
 
     //updated the sortable array to the final array
     setPreviewImageArray(_duplicateArray);
@@ -65,7 +68,7 @@ const GalleryImages: FC = () => {
       setSelectedImages(filteredUnchecked);
     }
   };
-
+console.log('* isDragging', isDragging)
   return (
     <div className="image_container">
       {previewImageArray.map((pItem, index) => (
@@ -75,10 +78,11 @@ const GalleryImages: FC = () => {
             className={`pItem${index + 1} singleImageBlock`}
             id={pItem?.id}
             onDragOver={(e: DragEvent<HTMLDivElement>) => e.preventDefault()}
-            onDragStart={(e) => (dragItem.current = index)}
-            onDragEnter={(e) => (dragOverItem.current = index)}
+            onDragStart={()=> handleOnDragStart(index)}
+            onDragEnter={(e) => handleOnDragEnter(index)}
             onDragEnd={handleSorting}
             draggable={true}
+           
           >
             <img src={pItem?.image} alt={pItem?.id} />
             <div
