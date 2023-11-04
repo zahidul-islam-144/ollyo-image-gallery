@@ -25,7 +25,7 @@ const GalleryImages: FC = () => {
   const [dragOverImageIndex, setDragOverImageIndex] = useState<number | null>(
     null
   );
-  const [checkedId, setCheckedId] = useState<number | null>(null);
+  const [checked, setChecked] = useState<boolean | null>(null);
   const dragItem = useRef<any>(null);
   const dragOverItem = useRef<any>(null);
 
@@ -60,10 +60,8 @@ const GalleryImages: FC = () => {
     );
 
     if (checked) {
-      setCheckedId(Number(value));
       setSelectedImages((prev: any) => [...prev, filteredChecked[0]]);
     } else {
-      setCheckedId(null);
       setSelectedImages(filteredUnchecked);
     }
   };
@@ -76,22 +74,38 @@ const GalleryImages: FC = () => {
             key={pItem?.id}
             className={`pItem${index + 1} singleImageBlock`}
             id={pItem?.id}
-            onDragOver={(e:DragEvent<HTMLDivElement>)=>e.preventDefault()}
+            onDragOver={(e: DragEvent<HTMLDivElement>) => e.preventDefault()}
             onDragStart={(e) => (dragItem.current = index)}
             onDragEnter={(e) => (dragOverItem.current = index)}
             onDragEnd={handleSorting}
             draggable={true}
           >
             <img src={pItem?.image} alt={pItem?.id} />
-            <div className={`hover_overlay  `}></div>
+            <div
+              className={`hover_overlay  ${
+                selectedImages.find(
+                  (selectItem) => selectItem?.id === pItem?.id
+                ) && "select_overlay"
+              }`}
+            ></div>
             <input
               type="checkbox"
               id={pItem?.id}
-              // checked = {isChecked ? true : false}
+              checked={
+                selectedImages.find(
+                  (selectItem) => selectItem?.id === pItem?.id
+                )
+                  ? true
+                  : false
+              }
+              className={`${
+                selectedImages.find(
+                  (selectItem) => selectItem?.id === pItem?.id
+                ) && "checked"
+              }`}
               value={pItem?.id}
               name="image-selection"
               onChange={(e) => handleCheckBox(e)}
-              onClick={() => setCheckedId(pItem)}
             />
           </div>
         </>
@@ -103,12 +117,3 @@ const GalleryImages: FC = () => {
 };
 
 export default GalleryImages;
-
-/*
-
-${
-                selectedImages.filter((selectItem) => selectItem?.id === pItem) &&
-                "select_overlay"
-              }
-
-*/
