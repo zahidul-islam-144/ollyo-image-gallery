@@ -70,6 +70,7 @@ const GalleryImages: FC = () => {
     }
   };
 
+  console.log("* selectedImages", selectedImages)
   return (
     <div className="image_container">
       {previewImageArray.map((pItem: any, index: number) =>

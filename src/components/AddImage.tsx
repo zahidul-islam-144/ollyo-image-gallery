@@ -10,18 +10,18 @@ const AddImage: FC = () => {
     // converting FileList to File[] using Array.from(obj) method
     const addedImageArray = Array.from(files);
     // updated adding new image into an existing array (previewImageArray)
-    addedImageArray?.forEach((newImg) =>
+    addedImageArray?.forEach((newImg, index) =>
       setPreviewImageArray((prev: any) => [
         ...prev,
         {
-          id: previewImageArray.length + 1,
+          id: previewImageArray.length + (index+1),
           image: URL.createObjectURL(newImg),
         },
       ])
     );
   };
 
-
+console.log("* previewImageArray", previewImageArray)
   return (
     <div className="add_photo">
       <input

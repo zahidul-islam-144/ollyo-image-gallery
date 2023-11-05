@@ -23,7 +23,7 @@ const TopHeader: FC = () => {
     setSelectedImages([]);
  
   };
-  // console.log("* selectedImages", selectedImages);
+  console.log("* selectedImages:TopHeader", selectedImages);
   return (
     <section className="topHeader_main">
       <div>
