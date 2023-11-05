@@ -7,7 +7,7 @@
 2. TypeScript
 3. Context API
 4. React Memo
-5. dataTransfer API for DnD and sorting
+
    
 # Note: No external library and packages are used. 
 
